@@ -1,8 +1,10 @@
 (function () {
-    const shadowRoot = document.querySelector('#keytar-container').shadowRoot;
+    const shadowRoot = document.querySelector('#piano-container').shadowRoot;
     const container = shadowRoot.querySelector('.template-outer-wrapper');
     const collapsed = shadowRoot.querySelector('.collapsed-section')
     const expanded = shadowRoot.querySelector('.expanded-section')
+
+    console.log(this.shadowRoot);
 
     const linkClicked = e => {
         e.preventDefault();

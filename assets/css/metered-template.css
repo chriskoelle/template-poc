@@ -97,7 +97,6 @@
 }
 .template-controls button:focus {
     text-decoration: underline;
-    text-decoraction
 }
 .template-controls button:after {
     content: '';
