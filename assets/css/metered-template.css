@@ -1,0 +1,271 @@
+.template-outer-wrapper {
+    transition: max-height .6s ease-in-out;
+    overflow: hidden;
+}
+.template-container {
+    background: #FF0135;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+}
+
+.expanded .template-container {
+    background: #FF0135 url(https://kubrick.kubefeature.hearstapps.net/hmg-dev.s3.amazonaws.com/images/issa-1593537175.jpg?crop=0.4xw:0.545xh;0.25xw,0.345xh&resize=*:600) top right no-repeat;
+    background-size: auto 100%;
+}
+
+.template-content {
+    position: relative;
+    max-width: 75rem;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+}
+
+.collapsed-section,
+.expanded-section {
+    position: relative;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    z-index: 2;
+    overflow: hidden;
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+}
+
+.expanded .collapsed-section,
+.expanded .collapsed-controls,
+.collapsed .expanded-section,
+.collapsed .expanded-controls {
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    transform: translate3d(0, 2rem, 0);
+}
+.template-controls {
+    display: grid;
+    align-self: stretch;
+    align-items: flex-start;
+}
+
+.collapsed-controls,
+.expanded-controls {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+    padding: 1rem;
+    position: relative;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+    justify-self: flex-end;
+}
+.collapsed-controls {
+    display: flex;
+    height: 2.75rem;
+    align-items: center;
+}
+.expanded .collapsed-controls> a,
+.collapsed .expanded-controls> a {
+    position: absolute;
+}
+.template-controls button,
+.template-controls a {
+    appearance: none;
+    padding: 0;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+    color: #fff;
+    font-size: 1rem;
+    font-family: Futura W05,Helvetica,Arial,Sans-serif;
+    border: 0;
+    letter-spacing: 0.125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    outline: 0;
+    margin-left: 0.625rem;
+    white-space: nowrap;
+}
+.template-controls a {
+    color: #fff;
+    opacity: 0.75;
+    font-weight: 300;
+}
+.template-controls button:focus {
+    text-decoration: underline;
+    text-decoraction
+}
+.template-controls button:after {
+    content: '';
+    border-style: solid;
+    border-color: #fff transparent;
+    border-width: 0.625rem 0.375rem;
+    margin-left: 0.25rem;
+    position: relative;
+    top: -.09375rem;
+}
+#collapse-btn:after {
+    border-bottom: 0;
+}
+#expand-btn:after {
+    border-top: 0;
+}
+
+.collapsed-section {
+    padding: 1rem
+}
+
+.expanded-section {
+    padding: 2rem 1rem;
+}
+
+.expanded-content {
+    padding: 1rem 0;
+    color: #fff;
+}
+
+.expanded-container,
+.collapsed-container {
+    display: flex;
+}
+
+.counter-container {
+    padding-right: 1rem;
+    margin-right: 1rem;
+    border-right: 2px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.counter {
+    margin: 0;
+    font-family: Futura W05, Helvetica, Arial, Sans-serif;
+    letter-spacing: 0.125rem;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: center;
+    color: #fff;
+}
+
+.counter-number {
+    background-color: #ffffff;
+    font-family: Futura W05, Helvetica, Arial, Sans-serif;
+    font-size: 2rem;
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    height: 1.4em;
+    width: 1.4em;
+    line-height: 1.3;
+    color: #000;
+    text-align: center;
+}
+
+.collapsed-counter-container .counter {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    line-height: 1.1;
+}
+
+.collapsed-counter-container .counter-number {
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.expanded-counter-container {
+    padding-right: 2.5rem;
+    margin-right: 2.5rem;
+}
+
+.expanded-counter-container .counter-number {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem
+}
+
+h1 {
+    text-align: left;
+    color: #ffffff;
+    font-size: 1.75rem;
+    cursor: pointer;
+    font-weight: 700;
+    margin-top: 0.3125rem;
+    font-family: Futura W05, Helvetica, Arial, Sans-serif;
+    letter-spacing: 0.125rem;
+    line-height: 1.5;
+}
+
+h1 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.collapsed-section h1 {
+    margin: 0;
+}
+
+.expanded-btns {
+    display: flex;
+    align-items: center;
+}
+
+.expanded-buttons a {
+    font-family: Futura W05, Helvetica, Arial, Sans-serif;
+    letter-spacing: 0.125rem;
+    font-weight: 500;
+    display: inline-block;
+    font-size: 1rem;
+    margin-top: 20px;
+    border: 0;
+    padding: 0.625rem 1rem;
+    text-align: center;
+    color: #fff;
+}
+
+.expanded-buttons .btn {
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+}
+
+.user-authorized .sign-in-link {
+    display: none;
+}
+@media (min-width: 85rem) {
+
+    .expanded .template-container {
+    background: #FF0135;
+    }
+    .template-content {
+    background: #FF0135 url(https://kubrick.kubefeature.hearstapps.net/hmg-dev.s3.amazonaws.com/images/issa-1593537175.jpg?crop=0.4xw:0.545xh;0.25xw,0.345xh&resize=*:600) top right no-repeat;
+    background-size: auto 100%;
+    }
+
+    .collapsed .template-content {
+    background: #FF0135 url(https://kubrick.kubefeature.hearstapps.net/hmg-dev.s3.amazonaws.com/images/issa-1593537175.jpg?crop=0.4xw:0.6xh;0.25xw,0.4xh&resize=*:600) top right no-repeat;
+    background-size: auto 100%;
+    }
+
+    .expanded-content {
+    padding: 1rem 20% 1rem 0;
+    color: #fff;
+    }
+/* center template content on large screens */
+
+    .template-container:before {
+    content: '';
+    display: flex;
+    }
+
+    .template-controls,
+    .template-container:before {
+    flex: 1;
+    }
+}

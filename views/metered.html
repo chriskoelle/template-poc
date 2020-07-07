@@ -1,0 +1,67 @@
+<template id="keytar-template">
+  <link rel="stylesheet" href="/css/metered-template.css">
+  <script src="/js/metered-template.js"></script>
+  <div class="template-outer-wrapper expanded">
+    <div class="template-container">
+      <div class="template-content">
+        <div class="collapsed-section">
+          <div class="collapsed-container">
+            <div class="counter-container collapsed-counter-container">
+              <p class="counter">
+                <span class="counter-number">2</span>
+                <span class="counter-text">
+                  <span>ARTICLES<br>LEFT</span>
+                </span>
+              </p>
+            </div>
+            <div class="collapsed-content">
+              <h1>
+                <a href="#collapsed-link">
+                  Unlock Cosmo <span class="desktop">to get full access</span>
+                </a>
+              </h1>
+            </div>
+          </div>
+        </div>
+        <!--End class shrunken-->
+
+        <!--EXPANDED CLASS-->
+        <div class="expanded-section">
+          <div class="expanded-container">
+            <div class="counter-container expanded-counter-container">
+              <p class="counter">
+                <span class="counter-number">2</span>
+                <span class="counter-text">
+                  <span class="tablet">FREE</span>
+                  <span>ARTICLES LEFT</span>
+                  <span class="desktop">THIS MONTH</span>
+                </span>
+              </p>
+            </div>
+            <div class="expanded-content">
+              <h1>
+                <a href="expanded-link">Unlock Cosmo to get full access to everything we publish (even the
+                  naughty stuff)</a>
+              </h1>
+              <div class="expanded-buttons">
+                <a href="#join-now" class="btn">Join Now</a>
+                <a href="#sign-in" class="sign-in-link">Sign In</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!--SHRUNKEN CLASS-->
+      </div>
+      <div class="template-controls">
+        <div class="expanded-controls">
+          <button id="collapse-btn">Collapse</button>
+        </div>
+        <div class="collapsed-controls">
+          <a href="#sign-in" class="sign-in-link">Sign In</a>
+            <button id="expand-btn">Expand</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
