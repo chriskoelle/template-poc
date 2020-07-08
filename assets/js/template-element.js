@@ -21,10 +21,19 @@ class KeytarTemplate extends HTMLElement {
       }
     }));
   }
+  /**
+   * Get the data-template-id attribute value
+   */
+  getTemplateId() {
+    return this.getAttribute('data-template-id')
+  }
 
+  /**
+   * Hide the sign in links if the user is signed in
+   */
   toggleSignInLinks() {
     if (window.HRST.mylo) {
-      container.classList.add('user-authorized');
+      this.container.classList.add('user-authorized');
     }
   }
 
@@ -40,39 +49,52 @@ class KeytarTemplate extends HTMLElement {
   }
 
   collapseContent() {
-    toggleCollapse(true)
-    setHeight(this.collapsed.offsetHeight)
+    this.toggleCollapse(true)
+    this.setHeight(this.collapsed.offsetHeight)
   }
   expandContent() {
-    toggleCollapse(false)
-    setHeight(this.expanded.offsetHeight)
+    this.toggleCollapse(false)
+    this.setHeight(this.expanded.offsetHeight)
   }
 
+  /**
+   * Render the HTML content returned by AJAX
+   */
   renderContent(html) {
     var parser = new DOMParser();
     var doc = parser.parseFromString(html, 'text/html');
     const template = doc.getElementById('keytar-template')
     this.shadow.appendChild(template.content.cloneNode(true))
+
+
     this.attachEventListeners()
   }
 
+  /**
+   * Fetch the template content
+   * called when a keytar-template element is added to the page
+   */
   connectedCallback() {
     this.shadow = this.attachShadow({
       mode: 'open'
     })
-    fetch('https://mighty-waters-23092.herokuapp.com/template/meter-1')
+    const templateId = this.getTemplateId()
+    const templateUrl = `https://mighty-waters-23092.herokuapp.com/template/${templateId}`
+    fetch(templateUrl)
       .then(res => res.text())
       .then(this.renderContent.bind(this))
   }
 
   attachEventListeners() {
-    this.container = this.querySelector('.template-outer-wrapper');
-    this.collapsed = this.querySelector('.collapsed-section')
-    this.expanded = this.querySelector('.expanded-section')
+    this.container = this.shadow.querySelector('.template-outer-wrapper');
+    this.collapsed = this.shadow.querySelector('.collapsed-section')
+    this.expanded = this.shadow.querySelector('.expanded-section')
 
-    this.querySelector('#collapse-btn').addEventListener('click', this.collapseContent.bind(this))
-    this.querySelector('#expand-btn').addEventListener('click', this.expandContent.bind(this))
-    this.querySelectorAll('a').forEach(el => {
+    setTimeout(() => this.setHeight(this.expanded.offsetHeight), 100);
+
+    this.shadow.querySelector('#collapse-btn').addEventListener('click', this.collapseContent.bind(this))
+    this.shadow.querySelector('#expand-btn').addEventListener('click', this.expandContent.bind(this))
+    this.shadow.querySelectorAll('a').forEach(el => {
       el.addEventListener('click', this.linkClicked.bind(this))
     })
   }
