@@ -4,29 +4,7 @@
     const collapsed = shadowRoot.querySelector('.collapsed-section')
     const expanded = shadowRoot.querySelector('.expanded-section')
 
-    console.log(this.shadowRoot);
 
-    const linkClicked = e => {
-        e.preventDefault();
-        const {
-            href
-        } = e.currentTarget
-        console.log('click from the shadows', e)
-        const data = {
-            target: e.target,
-            currentTarget: e.currentTarget,
-            href,
-        };
-        window.dispatchEvent(new CustomEvent('keytar-click', {
-            bubbles: false,
-            detail: {
-                data
-            }
-        }));
-    }
-    shadowRoot.querySelectorAll('a').forEach(el => {
-        el.addEventListener('click', linkClicked)
-    })
 
     const toggleCollapse = collapse => {
         container.classList.toggle('collapsed', collapse)
@@ -62,5 +40,4 @@
             container.classList.add('user-authorized');
         }
     })
-
 })();
