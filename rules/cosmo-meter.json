@@ -1,0 +1,28 @@
+{
+  "conditions": {
+    "all": [
+      {
+        "fact": "path",
+        "operator": "matches",
+        "value": "/^/style-beauty//"
+      },
+      {
+        "fact": "display",
+        "operator": "in",
+        "value": ["listicle", "article"]
+      },
+      {
+        "fact": "views",
+        "operator": "lessThan",
+        "value": 3
+      }
+    ]
+  },
+  "event": {
+    "type": "metered-template",
+    "params": {
+      "template": "meter-1",
+      "target": "#piano-container"
+    }
+  }
+}

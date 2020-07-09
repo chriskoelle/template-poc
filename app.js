@@ -2,8 +2,10 @@ const express = require('express')
 const path = require('path');
 const cors = require('cors')
 const fs = require('fs');
-var port = process.env.PORT || 3000;
-var app = express();
+const port = process.env.PORT || 3000;
+const app = express();
+const Engine = require('json-rules-engine').Engine
+
 
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'assets')))
@@ -31,6 +33,33 @@ app.get('/template/:template',  (req, res) => {
     })
   }
 });
+
+const matchesOperator = (factValue, jsonValue) => {
+  if (!factValue) return false;
+  const regexp = new RegExp(factValue);
+
+  return regexp.test(jsonValue)
+}
+
+app.get('/rules', async (req, res) => {
+  const { query } = req;
+  const engine = new Engine([], {allowUndefinedFacts:true})
+  engine.addOperator('matches', matchesOperator);
+
+
+  const rulesPath = './rules'
+  const ruleFiles = fs.readdirSync(rulesPath);
+  ruleFiles.forEach(file => {
+    const rule = fs.readFileSync(`${rulesPath}/${file}`).toString();
+    engine.addRule(JSON.parse(rule));
+  })
+
+  engine.run(query).then(result => {
+    const { events } = result || {};
+
+    res.json(events);
+  })
+})
 
 app.listen(port, function () {
  console.log(`Example app listening on port !`);

@@ -1,0 +1,27 @@
+{
+  "conditions": {
+    "all": [{
+        "fact": "path",
+        "operator": "matches",
+        "value": "/^/style-beauty//"
+      },
+      {
+        "fact": "display",
+        "operator": "in",
+        "value": ["listicle", "article"]
+      },
+      {
+        "fact": "views",
+        "operator": "greaterThan",
+        "value": 3
+      }
+    ]
+  },
+  "event": {
+    "type": "blocker-template",
+    "params": {
+      "template": "meter-blocker",
+      "target": "#piano-container"
+    }
+  }
+}
