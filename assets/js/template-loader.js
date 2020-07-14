@@ -1,8 +1,13 @@
-// const jamUrl = 'http://localhost:5000';
+/**
+ * Template Loader
+ *
+ */
+
 const jamUrl = 'https://mighty-waters-23092.herokuapp.com';
 
 /**
  * Base JAM Template
+ * @extends HTMLElement
  */
 class JamTemplate extends HTMLElement {
   constructor() {
@@ -82,6 +87,7 @@ customElements.define('jam-template', JamTemplate);
 
 /**
  * Metered JAM Template
+ * @extends JamTemplate
  */
 class JamMeterTemplate extends JamTemplate {
 
@@ -126,11 +132,15 @@ window.addEventListener('jam-init', e => {
     .then(injectComponent);
 })
 
-const parseRulesResponse = (res) => {
-  return res.json();
-};
+const parseRulesResponse = (res) => res.json();
 
+/**
+ * Make a post request to the rules endpoint to retrieve template details
+ */
 const fetchTemplateId = params => {
+  /**
+   * TODO: pull the brand from the init event
+   */
   return fetch(jamUrl + '/rules/cosmo', {
     method: 'post',
   headers: {
@@ -140,9 +150,19 @@ const fetchTemplateId = params => {
   });
 };
 
-const injectComponent = (components) => {
-  if (components) {
-    components.forEach(({
+/**
+ * Inject custom components for matching templates
+ *
+ * @param {Object[]} templates Templates from the rules response
+ */
+const injectComponent = (templates) => {
+  /**
+   * TODO: add the template type to the rules response
+   */
+  const templateType = 'jam-meter-template';
+
+  if (templates) {
+    templates.forEach(({
       params: {
         templateId,
         targetSelector
@@ -151,7 +171,7 @@ const injectComponent = (components) => {
       const target = document.querySelector(targetSelector);
 
       if (target) {
-        const tpl = document.createElement('jam-meter-template');
+        const tpl = document.createElement(templateType);
         tpl.setAttribute('data-template-id', templateId);
         target.appendChild(tpl);
       }

@@ -21,7 +21,7 @@
     "type": "blocker-template",
     "params": {
       "templateId": "meter-blocker",
-      "targetSelector": "#piano-container"
+      "targetSelector": "#jam-container"
     }
   }
 }
