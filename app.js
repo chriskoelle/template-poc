@@ -9,6 +9,7 @@ const Engine = require('json-rules-engine').Engine
 
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'assets')))
+app.use(express.json())
 
 app.set('view engine', 'ejs');
 
@@ -36,33 +37,44 @@ app.get('/template/:template',  (req, res) => {
 
 const matchesOperator = (factValue, jsonValue) => {
   if (!factValue) return false;
-  const regexp = new RegExp(factValue);
+  const regexp = new RegExp(jsonValue);
 
-  return regexp.test(jsonValue)
+  return regexp.test(factValue)
 }
 
-app.get('/rules', async (req, res) => {
-  const { query } = req;
-  const engine = new Engine([], {allowUndefinedFacts:true})
+const runRules = async (brand, facts) => {
+  const engine = new Engine([], {
+    allowUndefinedFacts: true
+  })
   engine.addOperator('matches', matchesOperator);
 
 
-  const rulesPath = './rules'
+  const rulesPath = `./rules/${brand}`
   const ruleFiles = fs.readdirSync(rulesPath);
   ruleFiles.forEach(file => {
     const rule = fs.readFileSync(`${rulesPath}/${file}`).toString();
     engine.addRule(JSON.parse(rule));
   })
 
-  engine.run(query).then(result => {
-    const { events } = result || {};
+  const {events} = await engine.run(facts)
+  return events || []
+}
 
+app.post('/rules/:brand', async (req, res) => {
+  const { body, params: { brand } } = req;
+
+  const events = await runRules(brand, body);
     res.json(events);
-  })
+})
+
+app.get('/rules', async (req, res) => {
+  const { query } = req;
+  const events = await runRules('cosmo', query);
+    res.json(events);
 })
 
 app.listen(port, function () {
- console.log(`Example app listening on port !`);
+ console.log(`Listening on port ${port}!`);
 });
 
 

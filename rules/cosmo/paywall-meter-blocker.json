@@ -1,10 +1,9 @@
 {
   "conditions": {
-    "all": [
-      {
+    "all": [{
         "fact": "path",
         "operator": "matches",
-        "value": "/^/style-beauty//"
+        "value": "^/style-beauty/"
       },
       {
         "fact": "display",
@@ -13,16 +12,16 @@
       },
       {
         "fact": "views",
-        "operator": "equal",
-        "value": "3"
+        "operator": "greaterThan",
+        "value": 3
       }
     ]
   },
   "event": {
-    "type": "metered-template",
+    "type": "blocker-template",
     "params": {
-      "template": "meter-2",
-      "target": "#piano-container"
+      "templateId": "meter-blocker",
+      "targetSelector": "#piano-container"
     }
   }
 }
